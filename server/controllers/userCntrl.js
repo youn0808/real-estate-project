@@ -18,78 +18,82 @@ export const createUser = asyncHandler(async (req, res) => {
   } else res.status(201).send({ message: "User already existed" });
 });
 
-// function to book a visit to resd
-// export const bookVisit = asyncHandler(async (req, res) => {
-//   const { email, date } = req.body;
-//   const { id } = req.params;
+// function to book a visit to residency
+export const bookVisit = asyncHandler(async (req, res) => {
+  const { email, date } = req.body;
+  const { id } = req.params;
 
-//   try {
-//     const alreadyBooked = await prisma.user.findUnique({
-//       where: { email },
-//       select: { bookedVisits: true },
-//     });
+  try {
+    const alreadyBooked = await prisma.user.findUnique({
+      where: { email },
+      select: { bookedVisits: true },
+    });
 
-//     if (alreadyBooked.bookedVisits.some((visit) => visit.id === id)) {
-//       res
-//         .status(400)
-//         .json({ message: "This residency is already booked by you" });
-//     } else {
-//       await prisma.user.update({
-//         where: { email: email },
-//         data: {
-//           bookedVisits: { push: { id, date } },
-//         },
-//       });
-//       res.send("your visit is booked successfully");
-//     }
-//   } catch (err) {
-//     throw new Error(err.message);
-//   }
-// });
+    if (alreadyBooked.bookedVisits.some((visit) => visit.id === id)) {
+      res
+        .status(400)
+        .json({ message: "This residency is already booked by you" });
+    } else {
+      //book residency
+      await prisma.user.update({
+        where: { email: email },
+        data: {
+          bookedVisits: { push: { id, date } },
+        },
+      });
+      res.send("your visit is booked successfully");
+    }
+  } catch (err) {
+    throw new Error(err.message);
+  }
+});
 
 // // funtion to get all bookings of a user
-// export const getAllBookings = asyncHandler(async (req, res) => {
-//   const { email } = req.body;
-//   try {
-//     const bookings = await prisma.user.findUnique({
-//       where: { email },
-//       select: { bookedVisits: true },
-//     });
-//     res.status(200).send(bookings);
-//   } catch (err) {
-//     throw new Error(err.message);
-//   }
-// });
+export const getAllBookings = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+  try {
+    const bookings = await prisma.user.findUnique({
+      where: { email },
+      select: { bookedVisits: true },
+    });
+    res.status(200).send(bookings);
+  } catch (err) {
+    throw new Error(err.message);
+  }
+});
 
-// // function to cancel the booking
-// export const cancelBooking = asyncHandler(async (req, res) => {
-//   const { email } = req.body;
-//   const { id } = req.params;
-//   try {
-//     const user = await prisma.user.findUnique({
-//       where: { email: email },
-//       select: { bookedVisits: true },
-//     });
+// function to cancel the booking
+export const cancelBooking = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+  const { id } = req.params;
+  try {
+    const user = await prisma.user.findUnique({
+      where: { email: email },
+      select: { bookedVisits: true },
+    });
 
-//     const index = user.bookedVisits.findIndex((visit) => visit.id === id);
+    //get a specific visit reservation from the user
+    const index = user.bookedVisits.findIndex((visit) => visit.id === id);
 
-//     if (index === -1) {
-//       res.status(404).json({ message: "Booking not found" });
-//     } else {
-//       user.bookedVisits.splice(index, 1);
-//       await prisma.user.update({
-//         where: { email },
-//         data: {
-//           bookedVisits: user.bookedVisits,
-//         },
-//       });
+    if (index === -1) {
+      res.status(404).json({ message: "Booking does not exist" });
+    } else {
+      //remove the found visit from the bookvist list
+      user.bookedVisits.splice(index, 1);
 
-//       res.send("Booking cancelled successfully");
-//     }
-//   } catch (err) {
-//     throw new Error(err.message);
-//   }
-// });
+      await prisma.user.update({
+        where: { email },
+        data: {
+          bookedVisits: user.bookedVisits,
+        },
+      });
+
+      res.send("Success: Cancel visit booking ");
+    }
+  } catch (err) {
+    throw new Error(err.message);
+  }
+});
 
 // // function to add a resd in favourite list of a user
 // export const toFav = asyncHandler(async (req, res) => {
