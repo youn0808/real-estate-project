@@ -9,26 +9,25 @@ const Hero = () => {
         {/* left side */}
         <div className="flexColStart hero-left">
           <div className="hero-title">
-            <div className="orange-circle" />
             <motion.h1
-            initial={{ y: "2rem", opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{
-              duration: 2,
-              type: "ease-in",
-            }}
+              initial={{ y: "2rem", opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{
+                duration: 2,
+                type: "ease-in",
+              }}
             >
-              Discover <br />
-              Most Suitable
-              <br /> Property
+              Find <br />
+              Your Dream
+              <br /> Home
             </motion.h1>
           </div>
-          <div className="flexColStart secondaryText flexhero-des">
+          {/* <div className="flexColStart secondaryText flexhero-des">
             <span>Find a variety of properties that suit you very easilty</span>
             <span>Forget all difficulties in finding a residence for you</span>
-          </div>
+          </div> */}
 
-          <SearchBar/>
+          <SearchBar />
 
           <div className="flexCenter stats">
             <div className="flexColCenter stat">

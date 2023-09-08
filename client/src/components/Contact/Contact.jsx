@@ -1,8 +1,8 @@
 import React from "react";
 import "./Contact.css";
 import { MdCall } from "react-icons/md";
-import { BsFillChatDotsFill } from "react-icons/bs";
-import {HiChatBubbleBottomCenter} from 'react-icons/hi2'
+import { HiOutlineMail } from "react-icons/hi";
+import { HiChatBubbleBottomCenter } from "react-icons/hi2";
 const Contact = () => {
   return (
     <div id="contact-us" className="c-wrapper">
@@ -12,8 +12,8 @@ const Contact = () => {
           <span className="orangeText">Our Contact Us</span>
           <span className="primaryText">Easy to contact us</span>
           <span className="secondaryText">
-            We always ready to help by providijng the best services for you. We
-            beleive a good blace to live can make your life better{" "}
+            Our Commitment to Excellence: Making Lives Better, One Home at a
+            Time.{" "}
           </span>
 
           <div className="flexColStart contactModes">
@@ -26,7 +26,7 @@ const Contact = () => {
                   </div>
                   <div className="flexColStart detail">
                     <span className="primaryText">Call</span>
-                    <span className="secondaryText">021 123 145 14</span>
+                    <span className="secondaryText">+1 123 456 789</span>
                   </div>
                 </div>
                 <div className="flexCenter button">Call now</div>
@@ -35,19 +35,19 @@ const Contact = () => {
               <div className="flexColCenter mode">
                 <div className="flexStart">
                   <div className="flexCenter icon">
-                    <BsFillChatDotsFill size={25} />
+                    <HiOutlineMail size={25} />
                   </div>
                   <div className="flexColStart detail">
-                    <span className="primaryText">Chat</span>
-                    <span className="secondaryText">021 123 145 14</span>
+                    <span className="primaryText">Email</span>
+                    <span className="secondaryText">service@gmail.com</span>
                   </div>
                 </div>
-                <div className="flexCenter button">Chat now</div>
+                <div className="flexCenter button">Email now</div>
               </div>
             </div>
 
             {/* second row */}
-            <div className="flexStart row">
+            {/* <div className="flexStart row">
               <div className="flexColCenter mode">
                 <div className="flexStart">
                   <div className="flexCenter icon">
@@ -73,7 +73,7 @@ const Contact = () => {
                 </div>
                 <div className="flexCenter button">Message now</div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
 
