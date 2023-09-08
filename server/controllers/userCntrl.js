@@ -20,23 +20,24 @@ export const createUser = asyncHandler(async (req, res) => {
 
 // function to book a visit to residency
 export const bookVisit = asyncHandler(async (req, res) => {
-  const { email, date } = req.body;
+  const { date } = req.body;
   const { id } = req.params;
 
   try {
-    const alreadyBooked = await prisma.user.findUnique({
-      where: { email },
-      select: { bookedVisits: true },
-    });
+    // const alreadyBooked = await prisma.user.findUnique({
+    //   where: { email },
+    //   select: { bookedVisits: true },
+    // });
 
-    if (alreadyBooked.bookedVisits.some((visit) => visit.id === id)) {
-      res
-        .status(400)
-        .json({ message: "This residency is already booked by you" });
-    } else {
+    // if (alreadyBooked.bookedVisits.some((visit) => visit.id === id)) {
+    //   res
+    //     .status(400)
+    //     .json({ message: "This residency is already booked by you" });
+    // } else
+    {
       //book residency
       await prisma.user.update({
-        where: { email: email },
+        where: { email: "test1@gmail.com" },
         data: {
           bookedVisits: { push: { id, date } },
         },
@@ -51,6 +52,7 @@ export const bookVisit = asyncHandler(async (req, res) => {
 // // funtion to get all bookings of a user
 export const getAllBookings = asyncHandler(async (req, res) => {
   const { email } = req.body;
+  // const email = "test1@gmail.com";
   try {
     const bookings = await prisma.user.findUnique({
       where: { email },
@@ -98,6 +100,7 @@ export const cancelBooking = asyncHandler(async (req, res) => {
 // // function to add a resd in favourite list of a user
 export const toFav = asyncHandler(async (req, res) => {
   const { email } = req.body;
+  const testemail = "test1@gmail.com";
   const { rid } = req.params; // residency id
 
   try {
@@ -135,12 +138,15 @@ export const toFav = asyncHandler(async (req, res) => {
 
 // // function to get all favorites
 export const getAllFavorites = asyncHandler(async (req, res) => {
-  const { email } = req.body;
+  // const { email } = req.body;
+  const email = "test1@gmail.com";
   try {
     const favResd = await prisma.user.findUnique({
       where: { email },
       select: { favResidenciesID: true },
     });
+
+    console.log(favResd);
     res.status(200).send(favResd);
   } catch (err) {
     throw new Error(err.message);

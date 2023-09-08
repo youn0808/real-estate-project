@@ -17,25 +17,33 @@ const BookingModal = ({ opened, setOpened, email, propertyId }) => {
     toast.success("You have booked your visit", {
       position: "bottom-right",
     });
-    setUserDetails((prev) => ({
-      ...prev,
-      bookings: [
-        ...prev.bookings,
-        {
-          id: propertyId,
-          date: dayjs(value).format("DD/MM/YYYY"),
-        },
-      ],
-    }));
+    // setUserDetails((prev) => ({
+    //   ...prev,
+    //   bookings: [
+    //     ...prev.bookings,
+    //     {
+    //       id: propertyId,
+    //       date: dayjs(value).format("DD/MM/YYYY"),
+    //     },
+    //   ],
+    // }));
   };
 
   const { mutate, isLoading } = useMutation({
-    mutationFn: () => bookVisit(value, propertyId, email, token),
+    mutationFn: () => bookVisit(value, propertyId),
     onSuccess: () => handleBookingSuccess(),
     onError: ({ response }) => toast.error(response.data.message),
     onSettled: () => setOpened(false),
   });
 
+  const bookSucessModal = () => {
+    toast.success("You have booked your visit", {
+      position: "bottom-right",
+    });
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
+  };
   return (
     <Modal
       opened={opened}
@@ -43,7 +51,7 @@ const BookingModal = ({ opened, setOpened, email, propertyId }) => {
       title="Select your date of visit"
       centered
     >
-      <div className="flexColCenter" style={{gap: "1rem"}}>
+      <div className="flexColCenter" style={{ gap: "1rem" }}>
         <DatePicker value={value} onChange={setValue} minDate={new Date()} />
         <Button disabled={!value || isLoading} onClick={() => mutate()}>
           Book visit

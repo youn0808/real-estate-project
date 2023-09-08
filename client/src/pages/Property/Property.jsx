@@ -34,7 +34,7 @@ const Property = () => {
   } = useContext(UserDetailContext);
 
   const { mutate: cancelBooking, isLoading: cancelling } = useMutation({
-    mutationFn: () => removeBooking(id, user?.email, token),
+    mutationFn: () => removeBooking(id, "test1@gmail.com", token),
     onSuccess: () => {
       setUserDetails((prev) => ({
         ...prev,
@@ -155,7 +155,7 @@ const Property = () => {
               opened={modalOpened}
               setOpened={setModalOpened}
               propertyId={id}
-              email={user?.email}
+              email={"test1@gmail.com"}
             />
           </div>
 

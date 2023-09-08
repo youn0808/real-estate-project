@@ -47,13 +47,19 @@ const Facilities = ({
   } = useContext(UserDetailContext);
   const { refetch: refetchProperties } = useProperties();
 
-  const {mutate, isLoading} = useMutation({
-    mutationFn: ()=> createResidency({
-        ...propertyDetails, facilities: {bedrooms, parkings , bathrooms},
-    }, token),
-    onError: ({ response }) => toast.error(response.data.message, {position: "bottom-right"}),
-    onSettled: ()=> {
-      toast.success("Added Successfully", {position: "bottom-right"});
+  const { mutate, isLoading } = useMutation({
+    mutationFn: () =>
+      createResidency(
+        {
+          ...propertyDetails,
+          facilities: { bedrooms, parkings, bathrooms },
+        },
+        token
+      ),
+    onError: ({ response }) =>
+      toast.error(response.data.message, { position: "bottom-right" }),
+    onSettled: () => {
+      toast.success("Added Successfully", { position: "bottom-right" });
       setPropertyDetails({
         title: "",
         description: "",
@@ -67,14 +73,13 @@ const Facilities = ({
           parkings: 0,
           bathrooms: 0,
         },
-        userEmail: user?.email,
-      })
-      setOpened(false)
-      setActiveStep(0)
-      refetchProperties()
-    }
-
-  })
+        userEmail: "test1@gmail.com",
+      });
+      setOpened(false);
+      setActiveStep(0);
+      refetchProperties();
+    },
+  });
 
   return (
     <Box maw="30%" mx="auto" my="sm">
