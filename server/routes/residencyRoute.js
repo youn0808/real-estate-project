@@ -10,7 +10,7 @@ const router = express.Router();
 //create new residency
 router.post("/create", createResidency);
 //get all residency
-router.get("/allresidency", getAllResidencies);
+router.get("/allresd", getAllResidencies);
 //get a specific residency by giving id
 router.get("/:id", getResidency);
 
