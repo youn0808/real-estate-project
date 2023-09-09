@@ -8,7 +8,7 @@ const Hero = () => {
       <div className="paddings innerWidth flexCenter hero-container">
         {/* left side */}
         <div className="flexColStart hero-left">
-          <div className="hero-title">
+          <div className="hero-title" style={{ color: "orange" }}>
             <motion.h1
               initial={{ y: "2rem", opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -17,14 +17,16 @@ const Hero = () => {
                 type: "ease-in",
               }}
             >
-              Find <br />
-              Your Dream
-              <br /> Home
+              Find Your Dream Home
             </motion.h1>
           </div>
-          {/* <div className="flexColStart secondaryText flexhero-des">
-            <span>Find a variety of properties that suit you very easilty</span>
-            <span>Forget all difficulties in finding a residence for you</span>
+          {/* <div className="flexColStart">
+            <span style={{ color: "whitesmoke" }}>
+              Find a variety of properties that suit you very easilty
+            </span>
+            <span style={{ color: "whitesmoke" }}>
+              Forget all difficulties in finding a residence for you
+            </span>
           </div> */}
 
           <div className="flexCenter stats">
@@ -52,7 +54,7 @@ const Hero = () => {
         </div>
 
         {/* right side */}
-        <div className="flexCenter hero-right">
+        {/* <div className="flexCenter hero-right">
           <motion.div
             initial={{ x: "7rem", opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
@@ -64,7 +66,7 @@ const Hero = () => {
           >
             <img src="./hero-image.png" alt="houses" />
           </motion.div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

@@ -47,7 +47,7 @@ const Value = () => {
             {data.map((item, i) => {
               const [className, setClassName] = useState(null);
               return (
-                <div>Hee</div>
+                <div></div>
                 // <AccordionItem className={`accordionItem ${className}`} uuid={i} key={i}>
                 //   <AccordionItemHeading>
                 //     <AccordionItemButton className="flexCenter accordionButton ">
